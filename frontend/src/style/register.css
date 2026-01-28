@@ -1,0 +1,101 @@
+
+        body {
+          background: radial-gradient(circle at center, #f8fafc 0%, #e2e8f0 70%);
+        }
+
+        .animated-bg {
+          position: absolute;
+          inset: -40%;
+          background: linear-gradient(
+            120deg,
+            rgba(59,130,246,0.25),
+            rgba(99,102,241,0.18),
+            rgba(59,130,246,0.25)
+          );
+          animation: gradientMove 24s ease infinite;
+          filter: blur(160px);
+          z-index: 0;
+        }
+
+        @keyframes gradientMove {
+          0%,100% { transform: translate(0,0); }
+          50% { transform: translate(200px,140px); }
+        }
+
+        .orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(120px);
+          opacity: 0.45;
+          animation: floatOrb 20s ease-in-out infinite;
+          z-index: 0;
+        }
+
+        .orb.blue {
+          width: 320px;
+          height: 320px;
+          background: #93c5fd;
+          top: 12%;
+          left: 18%;
+        }
+
+        .orb.indigo {
+          width: 260px;
+          height: 260px;
+          background: #a5b4fc;
+          bottom: 15%;
+          right: 20%;
+          animation-delay: -8s;
+        }
+
+        @keyframes floatOrb {
+          0%,100% { transform: translate(0,0); }
+          50% { transform: translate(60px,-80px); }
+        }
+
+        .square {
+          position: absolute;
+          width: 90px;
+          height: 90px;
+          background: rgba(255,255,255,0.6);
+          border: 1px solid rgba(0,0,0,0.08);
+          border-radius: 16px;
+          backdrop-filter: blur(12px);
+          animation: squareCollision 16s ease-in-out infinite;
+          z-index: 1;
+        }
+
+        .square.small {
+          width: 60px;
+          height: 60px;
+          animation-duration: 20s;
+        }
+
+        .square.delay {
+          animation-delay: -8s;
+        }
+
+        @keyframes squareCollision {
+          0% { transform: translate(0,0); opacity: 0.6; }
+          35% { transform: translate(160px,110px); }
+          50% {
+            transform: translate(260px,0) scale(1.15);
+            opacity: 1;
+            box-shadow: 0 0 30px rgba(99,102,241,0.35);
+          }
+          65% { transform: translate(160px,-110px); }
+          100% { transform: translate(0,0); opacity: 0.6; }
+        }
+
+        .bg-lines::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(transparent 49%, rgba(0,0,0,0.04) 50%, transparent 51%),
+            linear-gradient(90deg, transparent 49%, rgba(0,0,0,0.04) 50%, transparent 51%);
+          background-size: 220px 220px;
+          z-index: 2;
+          pointer-events: none;
+        }
+    
