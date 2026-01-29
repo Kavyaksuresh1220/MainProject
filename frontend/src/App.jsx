@@ -39,6 +39,8 @@ import Wastemanagementstaff from './staff/waste/Wastemanagementstaff'
 import Wastemanagementpending from './staff/waste/Wastemanagementpending'
 import Userwastehistory from './user/components/Userwastehistory'
 import Wastemanagementconfirm from './staff/waste/Wastemanagementconfirm'
+import AdminGrocery from './admin/pages/AdminGrocery'
+import GroceryStaff from './staff/grocery/GroceryStaff'
 
 function App() {
 
@@ -80,6 +82,7 @@ function App() {
       <Route path='/admin-landing'element={<Adminlanding/>}/>
       <Route path='/admin-laundry'element={<Adminlaundry/>}/>
       <Route path='/admin-wastemanagement'element={<AdminWaste/>}/>
+      <Route path='/admin-grocerymanagement'element={<AdminGrocery/>}/>
 
 
       {/* laundrystaff */}
@@ -94,11 +97,14 @@ function App() {
       <Route path='/wastemanagement-staff'element={<Wastemanagementstaff/>}/>
       <Route path='/wastemanagement-staff-pending'element={<Wastemanagementpending/>}/>
       <Route path='/wastemanagement-staff-confirmed'element={<Wastemanagementconfirm/>}/>
+
+      {/* Grocerymanagement-stafff */}
+      <Route path='/Grocerymanagement-staff'element={<GroceryStaff/>}/>
+
       
 
 
-      
-
+    
     </Routes>
       
     </>

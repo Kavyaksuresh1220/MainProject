@@ -42,6 +42,11 @@ function Login() {
              navigate('/wastemanagement-staff')
           
           }
+          else if(response.data.existinguser.role ==="Grocerymanagement-Staff") {
+           
+             navigate('/Grocerymanagement-staff')
+          
+          }
           else {
             
              alert(response.data.message)

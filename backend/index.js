@@ -4,6 +4,7 @@ const express = require ('express')
 require('./config/db')
 const router = require('./router/router')
 const wasterouter = require('./router/wasteRouter')
+const groceryouter = require('./router/groceryRouter')
 const cors = require('cors')
 
 //2.  create application using express
@@ -14,6 +15,7 @@ server.use(cors())
 server.use(express.json())
 server.use(router)
 server.use(wasterouter)
+server.use(groceryouter)
 
 // 3.running server using listen method
 const PORT = process.env.PORT || 3000

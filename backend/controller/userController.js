@@ -252,3 +252,87 @@ exports.deletewastemangementstaff = async (req, res) => {
 
 
 
+// add grocery management satff
+exports.addgrocerymanagementStaff = async (req, res) => {
+  try {
+    const { username, email, password, phonenumber, address } = req.body
+
+    
+    const existingUser = await user.findOne({ email })
+    if (existingUser) {
+      return res.status(409).json({
+        message: "Staff already exists"
+      })
+    }
+
+    
+    const newStaff = new user({
+      username,
+      email,
+      password,
+      phonenumber,
+      address,
+      role: "Grocerymanagement-Staff"
+    })
+
+    await newStaff.save()
+
+    res.status(201).json({
+      message: "Grocerymanagemen-Staff added successfully",
+      staff: newStaff
+    })
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error: error.message
+    })
+  }
+}
+
+// get grocerymangement sataff
+
+exports.getgrocerymangementstaffs = async (req, res) => {
+  try {
+    const staffs = await user.find({ role: "Grocerymanagement-Staff" })
+
+    res.status(200).json({
+      message: "Users fetched",
+      staffs,
+      totalstaffs: staffs.length
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error: error.message
+    })
+  }
+}
+
+// delete grocerymangementstaff
+exports.deletegrocerymangementstaff = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    
+    const staff = await user.findById(id);
+
+    if (!staff) {
+      return res.status(404).json({ message: "Staff not found" });
+    }
+
+    if (staff.role !== "Grocerymanagement-Staff") {
+      return res.status(403).json({ message: "Cannot delete non-staff users" });
+    }
+
+    // Delete staff
+    await user.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Grocerymanagement-Staff deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+}
+
+
+

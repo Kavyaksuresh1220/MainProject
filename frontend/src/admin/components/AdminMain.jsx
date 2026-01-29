@@ -86,9 +86,11 @@ function AdminMain() {
         <div className="bg-white rounded-xl p-6 shadow">
           <h3 className="font-semibold">Grocery Items</h3>
           <p className="text-sm text-gray-500 mb-4">Daily essentials</p>
+          <Link to={'/admin-grocerymanagement'}>
           <button className="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-lg text-sm font-medium">
             Manage
           </button>
+          </Link>
         </div>
 
         <div className="bg-white rounded-xl p-6 shadow">
