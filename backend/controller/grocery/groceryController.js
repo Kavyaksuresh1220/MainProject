@@ -50,8 +50,25 @@ exports.addgrocery = async (req, res) => {
 
 
 exports.getgrocery=async(req,res)=>{
+
+console.log(req.query);//search luminar
+console.log(req.query.search);
+const searchKey=req.query.search
+
+
+
+
+
     try{
-        const allgrocery=await GroceryItem.find()
+const query={
+  productName:{
+    $regex:searchKey,
+    $options:'i'
+  }
+  
+}
+
+        const allgrocery=await GroceryItem.find(query)
         res.status(200).json({allgrocery})
     }
     catch(err){

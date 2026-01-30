@@ -18,10 +18,12 @@ const groceryItemSchema = new mongoose.Schema(
         'Grains',
         'Snacks',
         'Beverages',
-        'Essentials'
+        'Spices',
+
+        
       ]
     },
-
+ 
     price: {
       type: Number,
       required: true,

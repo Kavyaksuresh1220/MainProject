@@ -122,15 +122,9 @@ function Register() {
             </button>
           </div>
 
-          <div className="flex items-center gap-4 my-6">
-            <div className="flex-1 h-px bg-gray-300"></div>
-            <span className="text-xs text-gray-500">OR</span>
-            <div className="flex-1 h-px bg-gray-300"></div>
-          </div>
+          
 
-          <div className="grid grid-cols-1">
-            <button className="bg-white hover:bg-gray-100 border border-gray-300 rounded-lg py-2">G</button>
-          </div>
+          
         </div>
       </div>
     </>

@@ -28,6 +28,6 @@ export const addgroceryAPI=async(reqBody,reqHeader)=>{
      return await commonAPI('POST',`${serverURL}/api/addgrocery`,reqBody,reqHeader)
 }
 //get all books
-export const getAllgroceryAPI=async(reqHeader)=>{
-    return await commonAPI('GET',`${serverURL}/api/getgrocery`,{},reqHeader)
+export const getAllgroceryAPI=async(searchKey,reqHeader)=>{
+    return await commonAPI('GET',`${serverURL}/api/getgrocery?search=${searchKey}`,{},reqHeader)
 }

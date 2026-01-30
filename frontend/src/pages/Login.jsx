@@ -3,75 +3,52 @@ import { Link, useNavigate } from "react-router-dom";
 import '../style/login.css';
 import { loginAPI } from "../services/allAPIS";
 
-
 function Login() {
-  const [user,setUser]=useState({
-    "email":'',
-    "password":''
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
   })
-  const [token,setToken]=useState()
-  const navigate=useNavigate()
+  const [token, setToken] = useState()
+  const navigate = useNavigate()
 
-  const handlelogin =async()=>{
-    console.log(user);
-    if( !user.email || !user.password){
+  const handlelogin = async () => {
+    if (!user.email || !user.password) {
       alert('Please Fill The Form')
-    }
-    else {
-      //call loginuser api
+    } else {
       try {
         const response = await loginAPI(user)
-        console.log(response);
         if (response.status === 200) {
-           setToken(response.data.token)
-           sessionStorage.setItem("token",response.data.token)
-           sessionStorage.setItem("userDetails",JSON.stringify(response.data.existinguser))
-          
-          if (response.data.existinguser.role ==="Admin") {
-           
-             navigate('/admin-landing')
-          
-          }
-          else if(response.data.existinguser.role ==="Laundry-Staff") {
-           
-             navigate('/laundry-staff')
-          
-          }
-          else if(response.data.existinguser.role ==="Wastemanagement-Staff") {
-           
-             navigate('/wastemanagement-staff')
-          
-          }
-          else if(response.data.existinguser.role ==="Grocerymanagement-Staff") {
-           
-             navigate('/Grocerymanagement-staff')
-          
-          }
-          else {
-            
-             alert(response.data.message)
-            navigate('/user-home')
-           
-          }
-        }
-        else {
-          alert(response.response.data.message);
+          setToken(response.data.token)
+          sessionStorage.setItem("token", response.data.token)
+          sessionStorage.setItem("userDetails", JSON.stringify(response.data.existinguser))
 
+          if (response.data.existinguser.role === "Admin") {
+            navigate('/admin-landing')
+          } else if (response.data.existinguser.role === "Laundry-Staff") {
+            navigate('/laundry-staff')
+          } else if (response.data.existinguser.role === "Wastemanagement-Staff") {
+            navigate('/wastemanagement-staff')
+          } else if (response.data.existinguser.role === "Grocerymanagement-Staff") {
+            navigate('/Grocerymanagement-staff')
+          } else {
+            navigate('/user-home')
+          }
+        } else {
+          alert(response.response.data.message)
         }
-      }
-      catch (err) {
-        console.log(err);
+      } catch (err) {
+        console.log(err)
       }
     }
-    
   }
+
   return (
     <>
-      
-
       {/* ===== Page Wrapper ===== */}
-      <div className="min-h-screen flex items-center justify-center text-gray-800 relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center relative overflow-hidden
+                      text-gray-800 dark:text-gray-100">
 
+        {/* animated background (CSS based) */}
         <div className="animated-bg"></div>
         <div className="orb blue"></div>
         <div className="orb indigo"></div>
@@ -83,9 +60,13 @@ function Login() {
         <div className="absolute inset-0 bg-lines"></div>
 
         {/* ===== Login Card ===== */}
-        <div className="relative z-10 w-full max-w-md mx-4 bg-white/70 backdrop-blur-xl
-                        border border-gray-200 rounded-2xl shadow-xl p-8">
+        <div className="relative z-10 w-full max-w-md mx-4
+                        bg-white/70 dark:bg-slate-900/80
+                        backdrop-blur-xl
+                        border border-gray-200 dark:border-slate-700
+                        rounded-2xl shadow-xl p-8">
 
+          {/* Logo */}
           <div className="flex justify-center mb-6">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600
                             flex items-center justify-center">
@@ -93,61 +74,76 @@ function Login() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-semibold text-center text-gray-900">
+          <h2 className="text-2xl font-semibold text-center
+                         text-gray-900 dark:text-white">
             Welcome Back
           </h2>
 
-          <p className="text-sm text-gray-500 text-center mt-2">
-  Don’t have an account yet?
-  <Link
-    to="/register"
-    className="text-blue-600 hover:underline ml-1 inline-block"
-  >
-    Sign up
-  </Link>
-</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-2">
+            Don’t have an account yet?
+            <Link
+              to="/register"
+              className="text-blue-600 dark:text-blue-400 hover:underline ml-1 inline-block"
+            >
+              Sign up
+            </Link>
+          </p>
 
-
+          {/* Inputs */}
           <div className="mt-8 space-y-4">
             <input
               type="email"
               placeholder="Email address"
-              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-sm
+              className="w-full rounded-lg px-4 py-3 text-sm
+                         bg-white dark:bg-slate-800
+                         border border-gray-300 dark:border-slate-600
+                         text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onChange={(e)=>setUser({...user,email:e.target.value})}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
 
             <input
               type="password"
               placeholder="Password"
-              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-sm
+              className="w-full rounded-lg px-4 py-3 text-sm
+                         bg-white dark:bg-slate-800
+                         border border-gray-300 dark:border-slate-600
+                         text-gray-900 dark:text-white
                          focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onChange={(e)=>setUser({...user,password:e.target.value})}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
             />
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 transition
-                         py-3 rounded-lg font-medium text-white"
-                         onClick={handlelogin}>
-              
+              className="w-full py-3 rounded-lg font-medium text-white transition
+                         bg-blue-600 hover:bg-blue-700
+                         dark:bg-indigo-600 dark:hover:bg-indigo-500"
+              onClick={handlelogin}
+            >
               Login
             </button>
           </div>
 
+          {/* Divider */}
           <div className="flex items-center gap-4 my-6">
-            <div className="flex-1 h-px bg-gray-300"></div>
-            <span className="text-xs text-gray-500">OR</span>
-            <div className="flex-1 h-px bg-gray-300"></div>
+            <div className="flex-1 h-px bg-gray-300 dark:bg-slate-600"></div>
+            <span className="text-xs text-gray-500 dark:text-gray-400">OR</span>
+            <div className="flex-1 h-px bg-gray-300 dark:bg-slate-600"></div>
           </div>
 
+          {/* Social login */}
           <div className="grid grid-cols-1">
-            <button className="bg-white hover:bg-gray-100 border border-gray-300 rounded-lg py-2">G</button>
+            <button className="bg-white dark:bg-slate-800
+                               hover:bg-gray-100 dark:hover:bg-slate-700
+                               border border-gray-300 dark:border-slate-600
+                               rounded-lg py-2">
+              G
+            </button>
           </div>
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export default Login;
